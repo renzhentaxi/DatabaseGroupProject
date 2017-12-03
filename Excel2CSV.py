@@ -59,6 +59,8 @@ def load_employees(ws):
         emp = [firstName, lastName, userName, "salesRep"]
         if emp not in employees:
             employees.append(emp)
+    for i in range (0, len(employees)):
+        employees[i].insert(0, i)
     return employees
 
 
@@ -67,15 +69,15 @@ def generate_accounts(employees):
     print("Generating accounts")
     accounts = []
     for emp in employees:
-        accountName = emp[2]
+        accountId = emp[0]
+        accountName = emp[3]
         accountPassword = 1234
-        account = [accountName, accountPassword]
-
+        account = [accountId, accountName, accountPassword]
         accounts.append(account)
     return accounts
 
 
-def load_salesLeads(ws):
+def load_salesLeads(ws, accounts):
     print("loading salesleads")
     salesLeads = []
 
@@ -92,7 +94,10 @@ def load_salesLeads(ws):
     emailCol = locate_column(ws, "email")
     webCol = locate_column(ws, "web")
 
+    userNameCol = locate_column(ws, "salesperson username")
+    userNameIdMap = dict(map(lambda x: (x[1],x[0]), accounts))
     for i in range(2, ws.max_row+1):
+        salesId = i
         firstName = ws.cell(row=i, column=firstNameCol).value
         lastName = ws.cell(row=i, column=lastNameCol).value
         comName = ws.cell(row=i, column=comNameCol).value
@@ -106,7 +111,9 @@ def load_salesLeads(ws):
         email = ws.cell(row=i, column=emailCol).value
         web = ws.cell(row=i, column=webCol).value
 
-        lead = (firstName, lastName, comName, address, city, county, state, zip, phone1, phone2, email, web)
+        repUserName = ws.cell(row=i, column = userNameCol).value
+        repId = userNameIdMap[repUserName]
+        lead = (salesId, firstName, lastName, comName, address, city, county, state, zip, phone1, phone2, email, web, repId)
 
         salesLeads.append(lead)
 
@@ -119,7 +126,7 @@ worksheet = load_worksheet(fileName)
 
 employees = load_employees(worksheet)
 accounts = generate_accounts(employees)
-salesLeads = load_salesLeads(worksheet)
+salesLeads = load_salesLeads(worksheet, accounts)
 
 create_csv(csvPath,employees, "employees")
 create_csv(csvPath,accounts, "accounts")

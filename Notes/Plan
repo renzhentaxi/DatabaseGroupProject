@@ -5,11 +5,16 @@ Data conversion
 Structure
 Excel format:first_name	last_name	company_name	address	city	county	state	zip	phone1	phone2	email	web	Salesperson	Salesperson Username
 CSV format:
-    Employee:  id, salesPersonName (split this two first last name), userName, position
+    Employee:  id, first name, last name, userName, position
     Account: id, userName, password
-    SalesLeads firstName, lastName, companyName, address, city, county, state, zip, phone1, phone2, email, web,UserName
+    SalesLeads: id firstName, lastName, companyName, address, city, county, state, zip, phone1, phone2, email, web, salesRepId
+
+accountId should equal to employee id
 
 
+
+refactor:
+turn employee, account,salesLeads to actual classes or dictionary
 
 Presentation/GUI
 
