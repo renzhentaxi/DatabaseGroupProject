@@ -1,0 +1,58 @@
+import psycopg2
+
+employeesTableDefinition = """
+    CREATE TABLE IF NOT EXISTS employees (
+    employeeId INT,
+    firstName VARCHAR(80),
+    lastName VARCHAR(80),
+    userName VARCHAR(80),
+    position VARCHAR(80)
+    );
+"""
+accountsTableDefinition = """
+    CREATE TABLE IF NOT EXISTS accounts (
+    accountId int,
+    userName varchar(80),
+    password varchar(80)
+    );
+"""
+salesLeadsTableDefinition = """
+    CREATE TABLE IF NOT EXISTS salesleads (
+    leadsId int,
+    firstName varchar(80),
+    lastName varchar(80),
+    companyName varchar(255),
+    address varchar(255),
+    city varchar(255),
+    county varchar(255),
+    state varchar(255),
+    zip int,
+    phone1 varchar(20),
+    phone2 varchar(20),
+    email varchar(255),
+    web varchar(255),
+    salesRepId int
+    )
+"""
+
+
+def load_from_csv(cur, csv_path, table_definition, table_name):
+    print("Creating the", table_name, "table")
+    cur.execute(table_definition)
+    f = open(csv_path)
+    cur.copy_from(f,table_name)
+
+
+conn = psycopg2.connect("dbname=mydb user=tashit")
+
+
+cur = conn.cursor()
+
+load_from_csv(cur, "./data/csv/employees.csv", employeesTableDefinition, "employees")
+load_from_csv(cur, "./data/csv/accounts.csv", accountsTableDefinition, "accounts")
+load_from_csv(cur, "./data/csv/salesleads.csv", salesLeadsTableDefinition, "salesleads")
+#create the three tables
+conn.commit()
+cur.close()
+conn.close()
+print("done")
