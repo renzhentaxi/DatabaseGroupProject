@@ -44,7 +44,7 @@ def load_employees(ws):
         firstName = salesPerson[0]
         lastName = salesPerson[2]
 
-        emp = [firstName, lastName, userName, "salesRep"]
+        emp = [firstName, lastName, userName, "rep"]
         if emp not in employees:
             employees.append(emp)
     for i in range (0, len(employees)):

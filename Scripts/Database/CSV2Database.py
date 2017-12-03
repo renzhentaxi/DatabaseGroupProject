@@ -1,24 +1,25 @@
 import psycopg2
 
+
 employeesTableDefinition = """
     CREATE TABLE IF NOT EXISTS employees (
-    employeeId INT,
+    employeeId INT UNIQUE PRIMARY KEY,
     firstName VARCHAR(80),
     lastName VARCHAR(80),
-    userName VARCHAR(80),
-    position VARCHAR(80)
+    userName VARCHAR(80) UNIQUE REFERENCES accounts (userName),
+    position jobrole
     );
 """
 accountsTableDefinition = """
     CREATE TABLE IF NOT EXISTS accounts (
-    accountId int,
-    userName varchar(80),
+    accountId int UNIQUE PRIMARY KEY,
+    userName varchar(80) UNIQUE,
     password varchar(80)
     );
 """
 salesLeadsTableDefinition = """
     CREATE TABLE IF NOT EXISTS salesleads (
-    leadsId int,
+    leadsId int UNIQUE PRIMARY KEY,
     firstName varchar(80),
     lastName varchar(80),
     companyName varchar(255),
@@ -31,7 +32,7 @@ salesLeadsTableDefinition = """
     phone2 varchar(20),
     email varchar(255),
     web varchar(255),
-    salesRepId int
+    salesRepId int REFERENCES employees (employeeid)
     )
 """
 
@@ -43,15 +44,14 @@ def load_from_csv(cur, csv_path, table_definition, table_name):
     cur.copy_from(f,table_name)
 
 
+
 conn = psycopg2.connect("dbname=mydb user=tashit")
-
-
 cur = conn.cursor()
 
-load_from_csv(cur, "./data/csv/employees.csv", employeesTableDefinition, "employees")
 load_from_csv(cur, "./data/csv/accounts.csv", accountsTableDefinition, "accounts")
+load_from_csv(cur, "./data/csv/employees.csv", employeesTableDefinition, "employees")
 load_from_csv(cur, "./data/csv/salesleads.csv", salesLeadsTableDefinition, "salesleads")
-#create the three tables
+
 conn.commit()
 cur.close()
 conn.close()
