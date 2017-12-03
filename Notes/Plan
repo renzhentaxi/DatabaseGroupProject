@@ -1,0 +1,27 @@
+Data conversion
+    First we turn Excel table to CSV
+    then upload it to the database via copy command
+
+Structure
+Excel format:first_name	last_name	company_name	address	city	county	state	zip	phone1	phone2	email	web	Salesperson	Salesperson Username
+CSV format:
+    Employee:  id, salesPersonName (split this two first last name), userName, position
+    Account: id, userName, password
+    SalesLeads firstName, lastName, companyName, address, city, county, state, zip, phone1, phone2, email, web,UserName
+
+
+
+Presentation/GUI
+
+Login System -> creates a token
+Log System
+
+LoginToken
+    AccountType
+    AccountId
+
+Query.GetStudents(Token, )
+Query.GetCourses(Token, )
+Query.GetAssignments(Token, )
+Query.GetProfessor(Token,)
+

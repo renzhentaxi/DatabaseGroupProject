@@ -1,0 +1,2 @@
+salesReps(id INTEGER PRIMARY KEY, fname TEXT, lname TEXT, userName TEXT)
+Accounts(userName TEXT, password TEXT)
