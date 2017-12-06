@@ -1,4 +1,7 @@
 import shutil
+import os
 #cleans the default csv folder
-
-shutil.rmtree("./data/csv")
+print("Cleaning the csv folder")
+if os.path.exists("./data/csv"):
+    shutil.rmtree("./data/csv")
+print('Done')

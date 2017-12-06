@@ -1,13 +1,16 @@
-#removes all tables in the database
 import psycopg2
 
-conn = psycopg2.connect("dbname=mydb user=tashit")
+print("Cleaning database")
+conn = psycopg2.connect("dbname=renzhentaxibaerde user=renzhentaxibaerde")
 cur = conn.cursor()
 
-cur.execute("DROP TABLE employees")
-cur.execute("DROP TABLE salesleads")
-cur.execute("DROP TABLE accounts")
+
+cur.execute("DROP Table IF EXISTS salesleads;")
+cur.execute("DROP Table IF EXISTS employees;")
+cur.execute("DROP Table IF EXISTS accounts;")
+cur.execute("DROP TYPE IF EXISTS jobrole;")
 
 conn.commit()
 cur.close()
 conn.close()
+print("done")

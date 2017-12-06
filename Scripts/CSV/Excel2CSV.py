@@ -12,7 +12,7 @@ def tuple2csv(tuple):
 
 
 def locate_column(ws, columnName):
-    columnName = columnName.lower();
+    columnName = columnName.lower()
     for i in range(1, ws.max_column + 1):
         if columnName == ws.cell(row=1, column=i).value.lower():
             return i
@@ -84,8 +84,10 @@ def load_salesLeads(ws, accounts):
 
     userNameCol = locate_column(ws, "salesperson username")
     userNameIdMap = dict(map(lambda x: (x[1],x[0]), accounts))
+
+    salesId = 0
+
     for i in range(2, ws.max_row+1):
-        salesId = i
         firstName = ws.cell(row=i, column=firstNameCol).value
         lastName = ws.cell(row=i, column=lastNameCol).value
         comName = ws.cell(row=i, column=comNameCol).value
@@ -104,6 +106,7 @@ def load_salesLeads(ws, accounts):
         lead = (salesId, firstName, lastName, comName, address, city, county, state, zip, phone1, phone2, email, web, repId)
 
         salesLeads.append(lead)
+        salesId +=1
 
     return salesLeads
 
