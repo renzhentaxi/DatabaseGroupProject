@@ -1,7 +1,5 @@
 import psycopg2
-import sys,os
 
-sys.path[0] = os.getcwd()
 from Scripts.Database.TableDefinition import tableDefinition
 
 print("Initializing database")
