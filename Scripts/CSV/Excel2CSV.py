@@ -22,8 +22,9 @@ def locate_column(ws, columnName):
 
 def create_csv(path, data, fileName):
     print("creating csv file for", fileName)
-    os.makedirs(os.path.dirname(path),exist_ok=True)
-
+    pathdir = os.path.dirname(path)
+    if not os.path.exists(pathdir):
+        os.makedirs(pathdir)
     fullName = path + fileName + ".csv"
     with open(fullName,"w+") as f:
         for row in data:
