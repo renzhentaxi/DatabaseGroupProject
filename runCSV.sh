@@ -1,4 +1,4 @@
 #! /usr/bin/env bash
 
-python3 ./Scripts/CSV/CleanCVS.py
-python3 ./Scripts/CSV/Excel2CSV.py
+python2 ./Scripts/CSV/CleanCVS.py
+python2 ./Scripts/CSV/Excel2CSV.py

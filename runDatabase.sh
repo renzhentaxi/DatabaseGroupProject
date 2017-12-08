@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
 
-python ./Scripts/Database/CleanDatabase.py
-python ./Scripts/Database/DatabaseInit.py
-python ./Scripts/Database/CSV2Database.py
+python2 ./Scripts/Database/CleanDatabase.py
+python2 ./Scripts/Database/DatabaseInit.py
+python2 ./Scripts/Database/CSV2Database.py
