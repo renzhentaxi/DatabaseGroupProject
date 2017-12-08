@@ -1,8 +1,8 @@
 #! /usr/bin/env bash
 
-./venv/bin/python ./Scripts/CSV/CleanCVS.py
-./venv/bin/python ./Scripts/CSV/Excel2CSV.py
+python3 ./Scripts/CSV/CleanCVS.py
+python3 ./Scripts/CSV/Excel2CSV.py
 
-./venv/bin/python ./Scripts/Database/CleanDatabase.py
-./venv/bin/python ./Scripts/Database/DatabaseInit.py
-./venv/bin/python ./Scripts/Database/CSV2Database.py
+python3 ./Scripts/Database/CleanDatabase.py
+python3 ./Scripts/Database/DatabaseInit.py
+python3 ./Scripts/Database/CSV2Database.py
